@@ -11,17 +11,18 @@ import android.widget.TextView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 
-public class Conference_Adapter extends FirestoreRecyclerAdapter<conference_1,Conference_Adapter.conference_holder> {
+public class Conference_Adapter extends FirestoreRecyclerAdapter<Conference,Conference_Adapter.conference_holder> {
 
     private onItemCLickListener listener;
 
-    public Conference_Adapter(@NonNull FirestoreRecyclerOptions<conference_1> options) {
+    public Conference_Adapter(@NonNull FirestoreRecyclerOptions<Conference> options) {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull conference_holder holder, final int position, @NonNull conference_1 model) {
+    protected void onBindViewHolder(@NonNull conference_holder holder, final int position, @NonNull Conference model) {
         holder.cname.setText(model.getName());
         holder.cdate.setText(model.getDate());
         holder.cvenue.setText(model.getVenue());

@@ -26,11 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class allConferencesFragment extends Fragment{
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -58,8 +56,8 @@ public class allConferencesFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         Query query = db.collection("CONFERENCE");
-        FirestoreRecyclerOptions<conference_1> options = new FirestoreRecyclerOptions.Builder<conference_1>()
-                .setQuery(query, conference_1.class).build();
+        FirestoreRecyclerOptions<Conference> options = new FirestoreRecyclerOptions.Builder<Conference>()
+                .setQuery(query, Conference.class).build();
         adapter = new Conference_Adapter(options);
         adapter.startListening();
         RecyclerView recyclerView = view.findViewById(R.id.my_recycler_view);
@@ -81,7 +79,7 @@ public class allConferencesFragment extends Fragment{
         adapter.setOnItemCLickLIstener(new Conference_Adapter.onItemCLickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                conference_1 conferenceItem= documentSnapshot.toObject(conference_1.class);
+                Conference conferenceItem= documentSnapshot.toObject(Conference.class);
                 String id=documentSnapshot.getId();
                 Toast.makeText(getActivity(), "position"+position+
                         "ID:"+id, Toast.LENGTH_SHORT).show();

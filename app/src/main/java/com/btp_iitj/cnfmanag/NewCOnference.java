@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,14 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class NewCOnference extends Fragment {
     private EditText name, venue, date, description;
     private Button save;
-    private static final String TAG = "Suppport";
     private FirebaseFirestore db;
 
     public NewCOnference() {
@@ -39,41 +35,40 @@ public class NewCOnference extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_new_conference, container, false);
-        name=view.findViewById(R.id.conf_name);
-        venue=view.findViewById(R.id.venue);
-        date=view.findViewById(R.id.date);
-        description=view.findViewById(R.id.description);
-        save=view.findViewById(R.id.SaveConf);
+        View view = inflater.inflate(R.layout.fragment_new_conference, container, false);
+        name = view.findViewById(R.id.conf_name);
+        venue = view.findViewById(R.id.venue);
+        date = view.findViewById(R.id.date);
+        description = view.findViewById(R.id.description);
+        save = view.findViewById(R.id.SaveConf);
+
+
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                final String name1=name.getText().toString();
-                final String venue1=venue.getText().toString();
-                final String date1=date.getText().toString();
-                final String description1=description.getText().toString();
+                Conference conf = new Conference(name.getText().toString(), date.getText().toString(), venue.getText().toString(), description.getText().toString());
+
                 Map<String, Object> conference = new HashMap<>();
-                db=FirebaseFirestore.getInstance();
-                conference.put("name",name1);
-                conference.put("venue",date1);
-                conference.put("date",date1);
-                conference.put("venue",venue1);
-                conference.put("description",description1);
+                db = FirebaseFirestore.getInstance();
+                conference.put("name", conf.getName());
+                conference.put("venue", conf.getVenue());
+                conference.put("date", conf.getDate());
+                conference.put("description", conf.getDescription());
                 Toast.makeText(getActivity(), "Data successfully Saved", Toast.LENGTH_SHORT).show();
 
 
-                db.collection("CONFERENCE").document("newconf")
+                db.collection("CONFERENCE").document(conf.getName())
                         .set(conference)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 //Toast.makeText(getContext(), "saved!", Toast.LENGTH_SHORT).show();
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
+                                //Log.d(TAG, "DocumentSnapshot successfully written!");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        //Log.w(TAG, "Error writing document", e);
                     }
                 });
             }

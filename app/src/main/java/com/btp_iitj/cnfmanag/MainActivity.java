@@ -14,10 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
+import com.btp_iitj.cnfmanag.Domain_Classes.Registration;
+import com.btp_iitj.cnfmanag.Domain_Classes.User;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static FragmentManager fragmentManager;
-    public static conference_1 conf = new conference_1();
+    public static User user = new User();
+    public static Registration registration = new Registration();
+    public static Conference conf = new Conference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

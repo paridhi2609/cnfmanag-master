@@ -21,13 +21,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class aboutConferenceFragment extends Fragment {
 
-    private FirebaseFirestore db;
     private static final String TAG = "Suppport";
     public static TextView a,b,c,d;
 
