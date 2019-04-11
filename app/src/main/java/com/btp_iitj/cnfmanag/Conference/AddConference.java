@@ -1,4 +1,4 @@
-package com.btp_iitj.cnfmanag;
+package com.btp_iitj.cnfmanag.Conference;
 
 
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
+import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,12 +21,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NewCOnference extends Fragment {
+import static com.btp_iitj.cnfmanag.Core.MainActivity.conf;
+
+public class AddConference extends Fragment {
     private EditText name, venue, date, description;
     private Button save;
     private FirebaseFirestore db;
 
-    public NewCOnference() {
+    public AddConference() {
         // Required empty public constructor
     }
 
@@ -46,7 +49,11 @@ public class NewCOnference extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Conference conf = new Conference(name.getText().toString(), date.getText().toString(), venue.getText().toString(), description.getText().toString());
+
+                conf.setName(name.getText().toString());
+                conf.setDate(date.getText().toString());
+                conf.setVenue(venue.getText().toString());
+                conf.setDescription(description.getText().toString());
 
                 Map<String, Object> conference = new HashMap<>();
                 db = FirebaseFirestore.getInstance();

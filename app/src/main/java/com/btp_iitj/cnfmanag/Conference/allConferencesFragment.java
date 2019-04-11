@@ -1,4 +1,4 @@
-package com.btp_iitj.cnfmanag;
+package com.btp_iitj.cnfmanag.Conference;
 
 
 import android.os.Bundle;
@@ -9,23 +9,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 
 
@@ -80,7 +74,7 @@ public class allConferencesFragment extends Fragment{
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 Conference conferenceItem= documentSnapshot.toObject(Conference.class);
-                String id=documentSnapshot.getId();
+                String id= documentSnapshot.getId();
                 Toast.makeText(getActivity(), "position"+position+
                         "ID:"+id, Toast.LENGTH_SHORT).show();
                 fragmentmanager = getActivity().getSupportFragmentManager();

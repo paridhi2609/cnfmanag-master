@@ -2,21 +2,15 @@ package com.btp_iitj.cnfmanag;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.btp_iitj.cnfmanag.Registration.RegistrationStep1Fragment;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -53,7 +47,7 @@ public class ViewProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new profilePage1()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).commit();
             }
         });
 

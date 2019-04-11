@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profilePage3"
+    tools:context=".Registration.RegistrationStep3Fragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -105,6 +105,7 @@
         android:layout_marginTop="70dp"
         android:layout_height="wrap_content"
         android:text="SUBMIT"
+        android:id="@+id/finalSubmit"
         android:textColor="#ffffff"
         android:background="@color/startblue"
         android:layout_gravity="center_horizontal"/>

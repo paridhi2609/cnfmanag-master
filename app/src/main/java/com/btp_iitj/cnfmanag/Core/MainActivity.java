@@ -1,10 +1,7 @@
-package com.btp_iitj.cnfmanag;
+package com.btp_iitj.cnfmanag.Core;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,9 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.btp_iitj.cnfmanag.Conference.AddConference;
+import com.btp_iitj.cnfmanag.Conference.aboutConferenceFragment;
+import com.btp_iitj.cnfmanag.Conference.allConferencesFragment;
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 import com.btp_iitj.cnfmanag.Domain_Classes.Registration;
 import com.btp_iitj.cnfmanag.Domain_Classes.User;
+import com.btp_iitj.cnfmanag.Registration.RegistrationFragment;
+import com.btp_iitj.cnfmanag.R;
+import com.btp_iitj.cnfmanag.ViewProfileFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -85,14 +88,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.create_new_conf) {
             // Handle the Create new conference button
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new NewCOnference()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new AddConference()).commit();
         } else if (id == R.id.all_conf) {
 
             fragmentManager=getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new allConferencesFragment()).commit();
         } else if (id == R.id.editUSerPRo) {
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditProfileFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).commit();
 
         } else if (id == R.id.viewProfile) {
             fragmentManager=getSupportFragmentManager();

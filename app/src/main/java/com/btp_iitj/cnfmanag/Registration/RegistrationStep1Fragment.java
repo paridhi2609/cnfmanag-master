@@ -1,4 +1,4 @@
-package com.btp_iitj.cnfmanag;
+package com.btp_iitj.cnfmanag.Registration;
 
 
 import android.os.Bundle;
@@ -17,30 +17,30 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
+import static com.btp_iitj.cnfmanag.Core.MainActivity.registration;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class profilePage1 extends Fragment implements AdapterView.OnItemSelectedListener {
+public class RegistrationStep1Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private String str;
     public String money;
     public TextView moneyam;
-    public static EditText secEmail;
+    public static EditText secEmail,secMob;
     public static Button nex, prev;
     private static final String TAG = "Suppport";
     private FirebaseFirestore db;
     public static FragmentManager fragmentManager;
 
-    public profilePage1() {
+    public RegistrationStep1Fragment() {
         // Required empty public constructor
     }
 
@@ -52,6 +52,7 @@ public class profilePage1 extends Fragment implements AdapterView.OnItemSelected
         View view= inflater.inflate(R.layout.fragment_profile_page1, container, false);
         nex=view.findViewById(R.id.save_page1);
         moneyam=view.findViewById(R.id.display);
+        secMob=view.findViewById(R.id.sec_contact);
         prev=view.findViewById(R.id.prev);
         secEmail=view.findViewById(R.id.sec_email);
         Spinner spinner = (Spinner) view.findViewById(R.id.salutation_spinner);
@@ -70,39 +71,17 @@ public class profilePage1 extends Fragment implements AdapterView.OnItemSelected
                 R.array.package_adapter, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+        registration.setSecemail(secEmail.getText().toString());
+        registration.setSecmob(secMob.getText().toString());
+
+
 
         ///handle next and previous
         nex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String salutation1=str;
-                final String secondemail=secEmail.getText().toString();
-
-                Map<String, Object> conference_user = new HashMap<>();
-                db=FirebaseFirestore.getInstance();
-                conference_user.put("salutation",salutation1);
-                conference_user.put("secondaryEmail",secondemail);
-
-
-                Toast.makeText(getActivity(), "Data successfully Edited", Toast.LENGTH_SHORT).show();
-
-
-                db.collection("CONFERENCE_USER").document()
-                        .set(conference_user)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-
-                                Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
-                    }
-                });
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new profilePage2()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep2Fragment()).commit();
 
             }
         });
@@ -111,7 +90,7 @@ public class profilePage1 extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new EditProfileFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).commit();
             }
         });
 
@@ -126,12 +105,15 @@ public class profilePage1 extends Fragment implements AdapterView.OnItemSelected
         Spinner spin = (Spinner)parent;
         Spinner spin2 = (Spinner)parent;
         if(spin.getId() == R.id.salutation_spinner)
+
         {
+            registration.setSalutation(str);
             Toast.makeText(getActivity(), "Your choose :1",Toast.LENGTH_SHORT).show();
         }
         String money="";
 
         if(spin2.getId() == R.id.package_selection_spinner) {
+            registration.setRegPackage(str);
             str=parent.getItemAtPosition(position).toString();
             if(str=="Full Registration")
                 money="10000";

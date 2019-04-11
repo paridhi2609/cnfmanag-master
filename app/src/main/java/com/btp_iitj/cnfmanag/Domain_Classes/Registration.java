@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class Registration {
     String  name, phone, email, secemail, secmob, salutation, regPackage, paymentMode, TransId,BankName, IfscCode, modeOfTrans;
-    Boolean accomodation;
-    Date  TransDate, dob, arrDate;
-    Time arrTime;
+    String accomodation;
+    Date TransDate;
+    String dob, arrDate;
+    String arrTime;
 
     public String getName() {
         return name;
@@ -106,11 +107,11 @@ public class Registration {
         this.modeOfTrans = modeOfTrans;
     }
 
-    public Boolean getAccomodation() {
+    public String getAccomodation() {
         return accomodation;
     }
 
-    public void setAccomodation(Boolean accomodation) {
+    public void setAccomodation(String accomodation) {
         this.accomodation = accomodation;
     }
 
@@ -122,27 +123,27 @@ public class Registration {
         TransDate = transDate;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
-    public Date getArrDate() {
+    public String getArrDate() {
         return arrDate;
     }
 
-    public void setArrDate(Date arrDate) {
+    public void setArrDate(String arrDate) {
         this.arrDate = arrDate;
     }
 
-    public Time getArrTime() {
+    public String getArrTime() {
         return arrTime;
     }
 
-    public void setArrTime(Time arrTime) {
+    public void setArrTime(String arrTime) {
         this.arrTime = arrTime;
     }
 }

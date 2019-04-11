@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profilePage2"
+    tools:context=".Registration.RegistrationStep2Fragment"
     android:orientation="vertical"
     >
 
@@ -76,7 +76,8 @@
         android:layout_marginRight="20dp"
         android:calendarTextColor="@color/startblue"
         android:visibility="visible"
-        tools:headerBackground="@color/startblue"></DatePicker>
+        android:id="@+id/dateP"
+        tools:headerBackground="@color/startblue" />
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="60dp"
