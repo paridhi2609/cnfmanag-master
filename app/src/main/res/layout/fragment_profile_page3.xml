@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profilePage3"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Mode Of Transport:"
+        android:textColor="@color/startblue"/>
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/transportSpinner"></Spinner>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/startblue"
+            android:layout_width="match_parent"
+            android:text="Arrival Date:"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_date_picker"
+            android:id="@+id/datePicker"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/startblue"
+            android:layout_width="match_parent"
+            android:text="Arrival Time:"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_access_time_black_24dp"
+            android:id="@+id/timePicker"
+            />
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:text="Accomodation: "
+        android:textColor="@color/startblue"/>
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radio_group">
+        <RadioButton android:id="@+id/yes"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            />
+        <RadioButton android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            />
+    </RadioGroup>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/startblue"
+        android:text="Once you Submit application no changes can be made!"/>
+    <Button
+        android:layout_width="160dp"
+        android:layout_marginTop="70dp"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        android:textColor="#ffffff"
+        android:background="@color/startblue"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
