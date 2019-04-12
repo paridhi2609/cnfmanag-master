@@ -2,27 +2,19 @@ package com.btp_iitj.cnfmanag.Registration;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.btp_iitj.cnfmanag.Core.MainActivity.registration;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 public class RegistrationFragment extends Fragment {
     public static EditText name, dob, mobile, email;
@@ -54,9 +46,11 @@ public class RegistrationFragment extends Fragment {
                 registration.setDob(dob.getText().toString());
                 registration.setEmail(email.getText().toString());
                 registration.setPhone(mobile.getText().toString());
+                RegistrationStep1Fragment registrationStep1Fragment=new RegistrationStep1Fragment();
+
 
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).addToBackStack("registrationFragment").commit();
             }
         });
 

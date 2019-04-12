@@ -21,7 +21,7 @@ import com.btp_iitj.cnfmanag.Registration.RegistrationFragment;
 import com.btp_iitj.cnfmanag.R;
 import com.btp_iitj.cnfmanag.ViewProfileFragment;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivityTwo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static FragmentManager fragmentManager;
     public static User user = new User();
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_two);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -88,18 +88,18 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.create_new_conf) {
             // Handle the Create new conference button
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new AddConference()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new AddConference()).addToBackStack("addConference").commit();
         } else if (id == R.id.all_conf) {
 
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new allConferencesFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new allConferencesFragment()).addToBackStack("allConferencesFragment").commit();
         } else if (id == R.id.editUSerPRo) {
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).addToBackStack("registrationFragment").commit();
 
         } else if (id == R.id.viewProfile) {
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, new ViewProfileFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, new ViewProfileFragment()).addToBackStack("viewProfileFragment").commit();
 
         } else if (id == R.id.Withdraw) {
             ///implement delete user

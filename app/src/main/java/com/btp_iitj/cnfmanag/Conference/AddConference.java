@@ -4,7 +4,6 @@ package com.btp_iitj.cnfmanag.Conference;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.btp_iitj.cnfmanag.Core.MainActivity.conf;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.conf;
 
 public class AddConference extends Fragment {
     private EditText name, venue, date, description;

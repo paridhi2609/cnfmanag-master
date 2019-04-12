@@ -21,7 +21,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import static com.btp_iitj.cnfmanag.Core.MainActivity.conf;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.conf;
 
 
 /**
@@ -89,7 +89,7 @@ public class ConferenceDetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationFragment()).addToBackStack("registrationFragment").commit();
                 Toast.makeText(getActivity(), "First fill the Details!", Toast.LENGTH_SHORT).show();
             }
         });

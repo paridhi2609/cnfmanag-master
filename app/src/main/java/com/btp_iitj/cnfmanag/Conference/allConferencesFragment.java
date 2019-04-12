@@ -82,7 +82,7 @@ public class allConferencesFragment extends Fragment{
                 Bundle args= new Bundle();
                 args.putString("documentId",id);
                 ldf.setArguments(args);
-                fragmentmanager.beginTransaction().replace(R.id.fragment_container,ldf).commit();
+                fragmentmanager.beginTransaction().replace(R.id.fragment_container,ldf).addToBackStack("ldf").commit();
             }
         });
     }

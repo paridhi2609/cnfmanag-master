@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.btp_iitj.cnfmanag.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import static com.btp_iitj.cnfmanag.Core.MainActivity.registration;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 
 /**
@@ -61,14 +61,14 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep3Fragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep3Fragment()).addToBackStack("registrationStep3Fragment").commit();
             }
         });
         pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).addToBackStack("registrationStep1Fragment").commit();
 
             }
         });

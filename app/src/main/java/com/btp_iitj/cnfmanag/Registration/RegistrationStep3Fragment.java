@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -23,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.btp_iitj.cnfmanag.Core.MainActivity.registration;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 
 /**
@@ -73,6 +72,7 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 myuser.put("modeOFtransport",registration.getModeOfTrans());
                 myuser.put("accomodation",registration.getAccomodation());
                 myuser.put("dob",registration.getDob());
+               //myuser.put("conferenceRegisteresId", conf.getName());
                 db.collection("RegisteredUser").document()
                         .set(myuser)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

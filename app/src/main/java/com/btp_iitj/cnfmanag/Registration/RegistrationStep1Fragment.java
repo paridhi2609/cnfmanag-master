@@ -2,10 +2,8 @@ package com.btp_iitj.cnfmanag.Registration;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
-import static com.btp_iitj.cnfmanag.Core.MainActivity.registration;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 
 /**
@@ -81,7 +75,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep2Fragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep2Fragment()).addToBackStack("registrationStep2Fragment").commit();
 
             }
         });
@@ -90,7 +84,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).addToBackStack("registrationFragment").commit();
             }
         });
 
