@@ -1,5 +1,6 @@
 package com.btp_iitj.cnfmanag.Core;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -17,9 +18,13 @@ import com.btp_iitj.cnfmanag.Conference.allConferencesFragment;
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 import com.btp_iitj.cnfmanag.Domain_Classes.Registration;
 import com.btp_iitj.cnfmanag.Domain_Classes.User;
+import com.btp_iitj.cnfmanag.MainActivity;
 import com.btp_iitj.cnfmanag.Registration.RegistrationFragment;
 import com.btp_iitj.cnfmanag.R;
+import com.btp_iitj.cnfmanag.Registration.RegistrationStep1Fragment;
+import com.btp_iitj.cnfmanag.Registration.RegistrationStep3Fragment;
 import com.btp_iitj.cnfmanag.ViewProfileFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivityTwo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -95,7 +100,15 @@ public class MainActivityTwo extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new allConferencesFragment()).addToBackStack("allConferencesFragment").commit();
         } else if (id == R.id.editUSerPRo) {
             fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).addToBackStack("registrationFragment").commit();
+            Bundle args= new Bundle();
+            RegistrationStep3Fragment ldf=new RegistrationStep3Fragment();
+            //String id=value;
+            Intent intent=getIntent();
+            String value=intent.getStringExtra("username");
+            RegistrationStep1Fragment registrationStep1Fragment=new RegistrationStep1Fragment();
+            args.putString("username",value);
+            registrationStep1Fragment.setArguments(args);
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, registrationStep1Fragment).addToBackStack("registrationFragment").commit();
 
         } else if (id == R.id.viewProfile) {
             fragmentManager=getSupportFragmentManager();
@@ -112,6 +125,11 @@ public class MainActivityTwo extends AppCompatActivity
 
 
 
+        }
+        else if(id==R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(new Intent(MainActivityTwo.this,MainActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

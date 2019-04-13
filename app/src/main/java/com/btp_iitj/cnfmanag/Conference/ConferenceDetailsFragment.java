@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.conf;
+import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 
 /**
@@ -88,6 +89,7 @@ public class ConferenceDetailsFragment extends Fragment {
         bR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                registration.setConferenceId(conf.getName());
                 fragmentManager=getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationFragment()).addToBackStack("registrationFragment").commit();
                 Toast.makeText(getActivity(), "First fill the Details!", Toast.LENGTH_SHORT).show();

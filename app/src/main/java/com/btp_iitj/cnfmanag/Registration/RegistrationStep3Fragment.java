@@ -1,15 +1,21 @@
 package com.btp_iitj.cnfmanag.Registration;
 
 
+import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,6 +25,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +37,11 @@ import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
  */
 public class RegistrationStep3Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public static Button finalsave;
+    public Calendar c;
     private FirebaseFirestore db;
+    public static ImageView datePIcker;
+    public static FragmentManager fragmentManager;
+    public DatePickerDialog dpd;
 
     public RegistrationStep3Fragment() {
         // Required empty public constructor
@@ -51,42 +62,42 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        datePIcker=view.findViewById(R.id.datePickr);
         finalsave=view.findViewById(R.id.finalSubmit);
+        datePIcker.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                c=Calendar.getInstance();
+                int date=c.get(Calendar.DAY_OF_MONTH);
+                int month=c.get(Calendar.MONTH);
+                int year=c.get(Calendar.YEAR);
+                dpd=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        registration.setArrDate(dayOfMonth+"/"+month+"/"+year);
+
+                    }
+                },date,month,year);
+                dpd.show();
+            }
+        });
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
         finalsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 db=FirebaseFirestore.getInstance();
+
                 Map<String,Object> myuser = new HashMap<>();
-                myuser.put("name",registration.getName());
-                myuser.put("phone",registration.getPhone());
-                myuser.put("email",registration.getEmail());
-                myuser.put("secEmail",registration.getSecemail());
-                myuser.put("secMob",registration.getSecmob());
-                myuser.put("salutation",registration.getSalutation());
-                myuser.put("registrationPackage",registration.getRegPackage());
-                myuser.put("paymentMode",registration.getPaymentMode());
-                myuser.put("TransId",registration.getTransId());
-                myuser.put("BankName",registration.getBankName());
-                myuser.put("IfscCode",registration.getIfscCode());
                 myuser.put("modeOFtransport",registration.getModeOfTrans());
                 myuser.put("accomodation",registration.getAccomodation());
-                myuser.put("dob",registration.getDob());
+               // myuser.put("dob",registration.getDob());
+               // myuser.put("transactinDate",registration.getTransDate());
+              //  myuser.put("conferenceId",registration.getConferenceId());
                //myuser.put("conferenceRegisteresId", conf.getName());
-                db.collection("RegisteredUser").document()
-                        .set(myuser)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //Log.w(TAG, "Error writing document", e);
-                            }
-                        });
+                String value=getArguments().getString("username");
+                db.collection("RegisteredUser").document(value)
+                        .update(myuser);
             }
         });
 

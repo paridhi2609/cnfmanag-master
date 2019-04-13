@@ -1,28 +1,48 @@
 package com.btp_iitj.cnfmanag.Registration;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.Core.MainActivityTwo;
 import com.btp_iitj.cnfmanag.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import static com.btp_iitj.cnfmanag.Conference.allConferencesFragment.fragmentmanager;
 import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
 public class RegistrationFragment extends Fragment {
     public static EditText name, dob, mobile, email;
+    private FirebaseAuth mAuth;
     public static Button save;
     private static final String TAG = "Suppport";
     public DocumentReference docref;
     public static FragmentManager fragmentManager;
-    private FirebaseFirestore db;
+    private FirebaseFirestore db,dbx;
     public RegistrationFragment() {
         // Required empty public constructor
     }
@@ -39,18 +59,64 @@ public class RegistrationFragment extends Fragment {
         email=view.findViewById(R.id.uemail);
         save=view.findViewById(R.id.save_user);
 
+        db=FirebaseFirestore.getInstance();
+
+
+
+
+
+
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+
                 registration.setName(name.getText().toString());
                 registration.setDob(dob.getText().toString());
                 registration.setEmail(email.getText().toString());
                 registration.setPhone(mobile.getText().toString());
-                RegistrationStep1Fragment registrationStep1Fragment=new RegistrationStep1Fragment();
+                db=FirebaseFirestore.getInstance();
+                Map<String,Object> myuser = new HashMap<>();
+                myuser.put("name",registration.getName());
+                myuser.put("phone",registration.getPhone());
+                myuser.put("email",registration.getEmail());
+                myuser.put("secEmail",registration.getSecemail());
+                myuser.put("secMob",registration.getSecmob());
+                myuser.put("salutation",registration.getSalutation());
+                myuser.put("registrationPackage",registration.getRegPackage());
+                myuser.put("paymentMode",registration.getPaymentMode());
+                myuser.put("TransId",registration.getTransId());
+                myuser.put("BankName",registration.getBankName());
+                myuser.put("IfscCode",registration.getIfscCode());
+                myuser.put("modeOFtransport",registration.getModeOfTrans());
+                myuser.put("accomodation",registration.getAccomodation());
+                myuser.put("dob",registration.getDob());
+                myuser.put("transactinDate",registration.getTransDate());
+                myuser.put("conferenceId",registration.getConferenceId());
+                //String dalna;
+                //dalna = mAuth.getCurrentUser().getUid();
+                docref=db.collection("RegisteredUser").document(name.getText().toString());
+                db.collection("RegisteredUser").document(name.getText().toString())
+                        .set(myuser)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                //Log.d(TAG, "DocumentSnapshot successfully written!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+                //myuser.put("conferenceRegisteresId", conf.getName());
+
+                //final String id=docref.getId();
+                Intent intent=new Intent(getActivity(),MainActivityTwo.class);
+                //intent.putExtra("documentId", id);
+                intent.putExtra("username",name.getText().toString());
+                startActivity(intent);
 
 
-                fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).addToBackStack("registrationFragment").commit();
             }
         });
 

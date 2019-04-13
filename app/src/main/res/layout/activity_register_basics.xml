@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivityTwo">
-    <TextView
+    tools:context=".RegisterBasicsActivity">
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="kdfjjljdsjklfdjkdfkfjldf"/>
+        android:layout_height="match_parent"
+        android:id="@+id/registerBasicFrame"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -73,15 +73,17 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 app:srcCompat="@drawable/ic_cake_black_24dp"/>
+
             <EditText
-                android:textStyle="bold"
-                android:textSize="21dp"
-                android:layout_gravity="center_vertical"
+                android:id="@+id/udob"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="DOB"
+                android:inputType="date"
                 android:paddingLeft="20dp"
-                android:id="@+id/udob"
-                android:hint="DOB"/>
+                android:textSize="21dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
@@ -94,15 +96,17 @@
                 android:layout_height="36dp"
                 app:srcCompat="@drawable/ic_phone_android_black_24dp"
                 />
+
             <EditText
-                android:textStyle="bold"
-                android:textSize="21dp"
-                android:layout_gravity="center_vertical"
+                android:id="@+id/uphone"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
+                android:layout_gravity="center_vertical"
                 android:hint="Phone"
-                android:id="@+id/uphone"/>
+                android:inputType="phone"
+                android:paddingLeft="20dp"
+                android:textSize="21dp"
+                android:textStyle="bold" />
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="25dp"
@@ -115,15 +119,17 @@
                 android:layout_height="36dp"
                 app:srcCompat="@drawable/ic_email_black_24dp"
                 />
+
             <EditText
-                android:textStyle="bold"
-                android:textSize="21dp"
-                android:layout_gravity="center_vertical"
+                android:id="@+id/uemail"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
+                android:layout_gravity="center_vertical"
                 android:hint="Email"
-                android:id="@+id/uemail"/>
+                android:inputType="textEmailAddress"
+                android:paddingLeft="20dp"
+                android:textSize="21dp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

@@ -69,15 +69,7 @@
     </RelativeLayout>
 
 
-    <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:calendarTextColor="@color/startblue"
-        android:visibility="visible"
-        android:id="@+id/dateP"
-        tools:headerBackground="@color/startblue" />
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="60dp"

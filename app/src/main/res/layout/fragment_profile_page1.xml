@@ -16,15 +16,17 @@
         android:layout_height="wrap_content"
         android:textSize="22dp"
         android:text="Email:"/>
+
     <EditText
-        android:textColor="@color/startblue"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="22dp"
+        android:id="@+id/sec_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sec_email"
-        android:hint="Enter Secondary Email:"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Enter Secondary Email:"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/startblue"
+        android:textSize="22dp" />
     <TextView
         android:layout_marginTop="13dp"
         android:layout_marginLeft="20dp"
@@ -34,15 +36,17 @@
         android:layout_height="wrap_content"
         android:textSize="22dp"
         android:text="Contact:"/>
+
     <EditText
-        android:textColor="@color/startblue"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="22dp"
+        android:id="@+id/sec_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sec_contact"
-        android:hint="Enter Secondary Mobile:"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Enter Secondary Mobile:"
+        android:inputType="phone"
+        android:textColor="@color/startblue"
+        android:textSize="22dp" />
     <TextView
         android:layout_marginTop="13dp"
         android:layout_marginBottom="13dp"
@@ -89,16 +93,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="80dp">
 
-        <Button
-            android:layout_alignParentLeft="true"
-            android:textStyle="bold"
-            android:background="@color/startblue"
-            android:textColor="#ffffff"
-            android:textSize="25dp"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/prev"
-            android:text="Prev"/>
+
         <Button
             android:layout_alignParentRight="true"
             android:background="@color/startblue"

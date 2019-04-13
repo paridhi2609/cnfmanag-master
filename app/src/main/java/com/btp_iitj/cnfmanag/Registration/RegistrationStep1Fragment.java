@@ -2,9 +2,11 @@ package com.btp_iitj.cnfmanag.Registration;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,7 +18,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.zip.CheckedInputStream;
 
 import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
@@ -30,8 +40,11 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
     public TextView moneyam;
     public static EditText secEmail,secMob;
     public static Button nex, prev;
+    public static Map<String,Object> myuser = new HashMap<>();
     private static final String TAG = "Suppport";
-    private FirebaseFirestore db;
+    private FirebaseFirestore db,dbx;
+    public DocumentReference docref;
+    Calendar c;
     public static FragmentManager fragmentManager;
 
     public RegistrationStep1Fragment() {
@@ -47,7 +60,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
         nex=view.findViewById(R.id.save_page1);
         moneyam=view.findViewById(R.id.display);
         secMob=view.findViewById(R.id.sec_contact);
-        prev=view.findViewById(R.id.prev);
+       // prev=view.findViewById(R.id.prev);
         secEmail=view.findViewById(R.id.sec_email);
         Spinner spinner = (Spinner) view.findViewById(R.id.salutation_spinner);
         spinner.setOnItemSelectedListener(this);
@@ -68,25 +81,54 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
         registration.setSecemail(secEmail.getText().toString());
         registration.setSecmob(secMob.getText().toString());
 
+        db=FirebaseFirestore.getInstance();
+
+
 
 
         ///handle next and previous
         nex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                registration.setSecemail(secEmail.getText().toString());
+                registration.setSecmob(secMob.getText().toString());
+                db=FirebaseFirestore.getInstance();
+
+
+                myuser.put("secEmail",secEmail.getText().toString());
+                myuser.put("secMob",secMob.getText().toString());
+
+
+                myuser.put("paymentMode","");
+                myuser.put("TransId","");
+                myuser.put("BankName","");
+                myuser.put("IfscCode","");
+                myuser.put("modeOFtransport","");
+                myuser.put("accomodation","");
+                myuser.put("dob","");
+                myuser.put("transactinDate","");
+                myuser.put("conferenceId","");
+                String value=getArguments().getString("username");
+                docref=db.collection("RegisteredUser").document(value);
+                docref.update(myuser);
+                //myuser.put("conferenceRegisteresId", conf.getName());
+
+                Bundle args= new Bundle();
+                RegistrationStep2Fragment ldf=new RegistrationStep2Fragment();
+                //String id=value;
+                args.putString("username",value);
+                ldf.setArguments(args);
+
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep2Fragment()).addToBackStack("registrationStep2Fragment").commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack("registrationStep2Fragment").commit();
+
 
             }
         });
 
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationFragment()).addToBackStack("registrationFragment").commit();
-            }
-        });
+
 
 
         return view;
@@ -102,6 +144,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
 
         {
             registration.setSalutation(str);
+            myuser.put("salutation",registration.getSalutation());
             Toast.makeText(getActivity(), "Your choose :1",Toast.LENGTH_SHORT).show();
         }
         String money="";
@@ -117,6 +160,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
                 money="15000";
             }
            // money="your cost for registration"+money;
+            myuser.put("registrationPackage",registration.getRegPackage());
 
             String temp="your amount for registrattion: ";
             moneyam.setText(temp);

@@ -2,12 +2,23 @@ package com.btp_iitj.cnfmanag.Domain_Classes;
 
 import android.text.format.Time;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Registration {
     String  name, phone, email, secemail, secmob, salutation, regPackage, paymentMode, TransId,BankName, IfscCode, modeOfTrans;
     String accomodation;
-    Date TransDate;
+    String ConferenceId;
+
+    public String getConferenceId() {
+        return ConferenceId;
+    }
+
+    public void setConferenceId(String conferenceId) {
+        this.ConferenceId = conferenceId;
+    }
+
+    String TransDate;
     String dob, arrDate;
     String arrTime;
 
@@ -115,11 +126,11 @@ public class Registration {
         this.accomodation = accomodation;
     }
 
-    public Date getTransDate() {
+    public String getTransDate() {
         return TransDate;
     }
 
-    public void setTransDate(Date transDate) {
+    public void setTransDate(String transDate) {
         TransDate = transDate;
     }
 

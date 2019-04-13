@@ -11,6 +11,11 @@
             android:id="@+id/about"
             android:title="About"></item>
         <item
+            android:id="@+id/logout"
+            android:title="logout">
+
+        </item>
+        <item
             android:id="@+id/all_conf"
             android:title="All conferences" />
         <item
