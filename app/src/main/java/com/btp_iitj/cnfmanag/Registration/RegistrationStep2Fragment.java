@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.btp_iitj.cnfmanag.Core.MainActivityTwo;
 import com.btp_iitj.cnfmanag.MainActivity;
 import com.btp_iitj.cnfmanag.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -54,6 +55,10 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile_page2, container, false);
+        FirebaseAuth kAuth;
+        kAuth=FirebaseAuth.getInstance();
+        final String userId=kAuth.getCurrentUser().getUid();
+        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         bankNam=view.findViewById(R.id.bankname);
         transid=view.findViewById(R.id.transacIdEDit);
         ifsccod=view.findViewById(R.id.ifscCode);
@@ -84,11 +89,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
                 myuser.put("TransId",registration.getTransId());
                 myuser.put("BankName",registration.getBankName());
                 myuser.put("IfscCode",registration.getIfscCode());
-                myuser.put("modeOFtransport",registration.getModeOfTrans());
-                myuser.put("accomodation",registration.getAccomodation());
-                myuser.put("dob",registration.getDob());
-                myuser.put("transactinDate",registration.getTransDate());
-                myuser.put("conferenceId",registration.getConferenceId());
+
                 //myuser.put("conferenceRegisteresId", conf.getName());
                 String value=getArguments().getString("username");
                 Bundle args= new Bundle();
@@ -96,7 +97,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
                 //String id=value;
                 args.putString("username",value);
                 ldf.setArguments(args);
-                db.collection("RegisteredUser").document(value)
+                db.collection("RegisteredUser").document(userId)
                         .update(myuser);
                 fragmentManager=getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack("registrationStep2Fragment").commit();

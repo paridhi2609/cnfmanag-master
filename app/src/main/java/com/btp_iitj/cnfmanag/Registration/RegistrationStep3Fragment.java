@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -53,6 +54,10 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile_page3, container, false);
+        FirebaseAuth kAuth;
+        kAuth=FirebaseAuth.getInstance();
+        final String userId=kAuth.getCurrentUser().getUid();
+        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         Spinner spinner = (Spinner) view.findViewById(R.id.transportSpinner);
         spinner.setOnItemSelectedListener(this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -96,7 +101,7 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
               //  myuser.put("conferenceId",registration.getConferenceId());
                //myuser.put("conferenceRegisteresId", conf.getName());
                 String value=getArguments().getString("username");
-                db.collection("RegisteredUser").document(value)
+                db.collection("RegisteredUser").document(userId)
                         .update(myuser);
             }
         });

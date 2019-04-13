@@ -53,6 +53,10 @@ public class RegistrationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        FirebaseAuth kAuth;
+        kAuth=FirebaseAuth.getInstance();
+        final String userId=kAuth.getCurrentUser().getUid();
+
         name=view.findViewById(R.id.uname);
         dob=view.findViewById(R.id.udob);
         mobile= view.findViewById(R.id.uphone);
@@ -77,24 +81,12 @@ public class RegistrationFragment extends Fragment {
                 Map<String,Object> myuser = new HashMap<>();
                 myuser.put("name",registration.getName());
                 myuser.put("phone",registration.getPhone());
-                myuser.put("email",registration.getEmail());
-                myuser.put("secEmail",registration.getSecemail());
-                myuser.put("secMob",registration.getSecmob());
-                myuser.put("salutation",registration.getSalutation());
-                myuser.put("registrationPackage",registration.getRegPackage());
-                myuser.put("paymentMode",registration.getPaymentMode());
-                myuser.put("TransId",registration.getTransId());
-                myuser.put("BankName",registration.getBankName());
-                myuser.put("IfscCode",registration.getIfscCode());
-                myuser.put("modeOFtransport",registration.getModeOfTrans());
-                myuser.put("accomodation",registration.getAccomodation());
                 myuser.put("dob",registration.getDob());
-                myuser.put("transactinDate",registration.getTransDate());
-                myuser.put("conferenceId",registration.getConferenceId());
+                myuser.put("email",registration.getEmail());
                 //String dalna;
                 //dalna = mAuth.getCurrentUser().getUid();
-                docref=db.collection("RegisteredUser").document(name.getText().toString());
-                db.collection("RegisteredUser").document(name.getText().toString())
+                docref=db.collection("RegisteredUser").document(userId);
+                db.collection("RegisteredUser").document(userId)
                         .set(myuser)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

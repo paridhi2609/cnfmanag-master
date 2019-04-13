@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -57,6 +58,10 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile_page1, container, false);
+        FirebaseAuth kAuth;
+        kAuth=FirebaseAuth.getInstance();
+       final String userId=kAuth.getCurrentUser().getUid();
+        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         nex=view.findViewById(R.id.save_page1);
         moneyam=view.findViewById(R.id.display);
         secMob=view.findViewById(R.id.sec_contact);
@@ -101,17 +106,8 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
                 myuser.put("secMob",secMob.getText().toString());
 
 
-                myuser.put("paymentMode","");
-                myuser.put("TransId","");
-                myuser.put("BankName","");
-                myuser.put("IfscCode","");
-                myuser.put("modeOFtransport","");
-                myuser.put("accomodation","");
-                myuser.put("dob","");
-                myuser.put("transactinDate","");
-                myuser.put("conferenceId","");
                 String value=getArguments().getString("username");
-                docref=db.collection("RegisteredUser").document(value);
+                docref=db.collection("RegisteredUser").document(userId);
                 docref.update(myuser);
                 //myuser.put("conferenceRegisteresId", conf.getName());
 
