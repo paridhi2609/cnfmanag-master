@@ -62,20 +62,8 @@ public class AddConference extends Fragment {
                 Toast.makeText(getActivity(), "Data successfully Saved", Toast.LENGTH_SHORT).show();
 
 
-                db.collection("CONFERENCE").document(conf.getName())
-                        .set(conference)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(getContext(), "saved!", Toast.LENGTH_SHORT).show();
-                                //Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error writing document", e);
-                    }
-                });
+                db.collection("CONFERENCE").document("science")
+                        .update(conference);
             }
         });
 

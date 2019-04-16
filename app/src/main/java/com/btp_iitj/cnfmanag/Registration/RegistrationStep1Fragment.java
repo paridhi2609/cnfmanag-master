@@ -106,16 +106,16 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
                 myuser.put("secMob",secMob.getText().toString());
 
 
-                String value=getArguments().getString("username");
+//                String value=getArguments().getString("username");
                 docref=db.collection("RegisteredUser").document(userId);
                 docref.update(myuser);
                 //myuser.put("conferenceRegisteresId", conf.getName());
 
-                Bundle args= new Bundle();
+                //Bundle args= new Bundle();
                 RegistrationStep2Fragment ldf=new RegistrationStep2Fragment();
                 //String id=value;
-                args.putString("username",value);
-                ldf.setArguments(args);
+               // args.putString("username",value);
+                //ldf.setArguments(args);
 
                 fragmentManager=getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack("registrationStep2Fragment").commit();

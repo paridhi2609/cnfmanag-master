@@ -91,12 +91,12 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
                 myuser.put("IfscCode",registration.getIfscCode());
 
                 //myuser.put("conferenceRegisteresId", conf.getName());
-                String value=getArguments().getString("username");
-                Bundle args= new Bundle();
+               // String value=getArguments().getString("username");
+                //Bundle args= new Bundle();
                 RegistrationStep3Fragment ldf=new RegistrationStep3Fragment();
                 //String id=value;
-                args.putString("username",value);
-                ldf.setArguments(args);
+                //args.putString("username",value);
+                //ldf.setArguments(args);
                 db.collection("RegisteredUser").document(userId)
                         .update(myuser);
                 fragmentManager=getActivity().getSupportFragmentManager();
@@ -120,7 +120,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
                 int date=c.get(Calendar.DAY_OF_MONTH);
                 int month=c.get(Calendar.MONTH);
                 int year=c.get(Calendar.YEAR);
-                dpd=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                dpd=new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         registration.setTransDate(dayOfMonth+"/"+month+"/"+year);

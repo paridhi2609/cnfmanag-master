@@ -96,13 +96,15 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 Map<String,Object> myuser = new HashMap<>();
                 myuser.put("modeOFtransport",registration.getModeOfTrans());
                 myuser.put("accomodation",registration.getAccomodation());
+                myuser.put("RequestStatus","R");
                // myuser.put("dob",registration.getDob());
                // myuser.put("transactinDate",registration.getTransDate());
               //  myuser.put("conferenceId",registration.getConferenceId());
                //myuser.put("conferenceRegisteresId", conf.getName());
-                String value=getArguments().getString("username");
+               //ar String value=getArguments().getString("username");
                 db.collection("RegisteredUser").document(userId)
                         .update(myuser);
+                Toast.makeText(getActivity(), "Request made for a seat!", Toast.LENGTH_LONG).show();
             }
         });
 

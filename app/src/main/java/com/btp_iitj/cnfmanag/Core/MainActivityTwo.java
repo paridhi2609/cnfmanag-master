@@ -12,7 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.btp_iitj.cnfmanag.AdminDashboard;
 import com.btp_iitj.cnfmanag.Conference.AddConference;
+import com.btp_iitj.cnfmanag.Conference.ConferenceDetailsFragment;
 import com.btp_iitj.cnfmanag.Conference.aboutConferenceFragment;
 import com.btp_iitj.cnfmanag.Conference.allConferencesFragment;
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
@@ -78,6 +80,8 @@ public class MainActivityTwo extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            ///current status
+
             return true;
         }
 
@@ -110,17 +114,30 @@ public class MainActivityTwo extends AppCompatActivity
             registrationStep1Fragment.setArguments(args);
             fragmentManager.beginTransaction().replace(R.id.fragment_container, registrationStep1Fragment).addToBackStack("registrationFragment").commit();
 
-        } else if (id == R.id.viewProfile) {
-            fragmentManager=getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, new ViewProfileFragment()).addToBackStack("viewProfileFragment").commit();
-
-        } else if (id == R.id.Withdraw) {
+        }
+         else if (id == R.id.Withdraw) {
             ///implement delete user
             ///remove document snapshot
 
-        } else if (id == R.id.about) {
+        } else if (id == R.id.about ) {
             fragmentManager =getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new aboutConferenceFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();
+            //infor of conference
+
+
+
+        }
+        else if (id == R.id.apply ) {
+            fragmentManager =getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();
+            //infor of conference
+
+
+
+        }
+        else if (id == R.id.Withdraw ) {
+            fragmentManager =getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();
             //infor of conference
 
 
@@ -131,7 +148,11 @@ public class MainActivityTwo extends AppCompatActivity
             finish();
             startActivity(new Intent(MainActivityTwo.this,MainActivity.class));
         }
-
+        else if(id==R.id.seeAllRequest){
+            fragmentManager =getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new AdminDashboard()).commit();
+        }
+        ///do for get current user
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

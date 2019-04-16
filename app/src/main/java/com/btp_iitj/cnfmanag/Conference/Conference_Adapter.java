@@ -33,7 +33,7 @@ public class Conference_Adapter extends FirestoreRecyclerAdapter<Conference,Conf
         holder.parid.setText(String.valueOf(position+1));
 
 
-        Log.d("suthar", "Model: " + model.toString());
+
 
     }
 

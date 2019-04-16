@@ -80,9 +80,11 @@ public class RegistrationFragment extends Fragment {
                 db=FirebaseFirestore.getInstance();
                 Map<String,Object> myuser = new HashMap<>();
                 myuser.put("name",registration.getName());
+                myuser.put("userId",userId);
                 myuser.put("phone",registration.getPhone());
                 myuser.put("dob",registration.getDob());
                 myuser.put("email",registration.getEmail());
+                myuser.put("RequestStatus","N");
                 //String dalna;
                 //dalna = mAuth.getCurrentUser().getUid();
                 docref=db.collection("RegisteredUser").document(userId);
@@ -106,6 +108,7 @@ public class RegistrationFragment extends Fragment {
                 Intent intent=new Intent(getActivity(),MainActivityTwo.class);
                 //intent.putExtra("documentId", id);
                 intent.putExtra("username",name.getText().toString());
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
 

@@ -8,6 +8,16 @@ import java.util.Date;
 public class Registration {
     String  name, phone, email, secemail, secmob, salutation, regPackage, paymentMode, TransId,BankName, IfscCode, modeOfTrans;
     String accomodation;
+    String accepted;
+
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(String accepted) {
+        this.accepted = accepted;
+    }
+
     String ConferenceId;
 
     public String getConferenceId() {
