@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.Core.MainActivityTwo;
@@ -38,6 +39,7 @@ import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 public class RegistrationFragment extends Fragment {
     public static EditText name, dob, mobile, email;
     private FirebaseAuth mAuth;
+    public TextView textView;
     public static Button save;
     private static final String TAG = "Suppport";
     public DocumentReference docref;
@@ -54,10 +56,13 @@ public class RegistrationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_edit_profile, container, false);
         FirebaseAuth kAuth;
+        textView=view.findViewById(R.id.registerednam);
         kAuth=FirebaseAuth.getInstance();
         final String userId=kAuth.getCurrentUser().getUid();
 
         name=view.findViewById(R.id.uname);
+        textView.setText(name.getText().toString());
+
         dob=view.findViewById(R.id.udob);
         mobile= view.findViewById(R.id.uphone);
         email=view.findViewById(R.id.uemail);
@@ -72,44 +77,67 @@ public class RegistrationFragment extends Fragment {
 
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if(name.getText().toString().isEmpty()){
+                    name.setError("Name is Required");
+                    name.requestFocus();
+                    return;
+                }
+                else  if(dob.getText().toString().isEmpty()){
+                    dob.setError("DOB is Required");
+                    dob.requestFocus();
+                    return;
+                }
+                else  if(mobile.getText().toString().isEmpty()){
+                    mobile.setError("Mobile is Required");
+                    mobile.requestFocus();
+                    return;
+                }
+                else  if(email.getText().toString().isEmpty()){
+                    email.setError("Email is Required");
+                    email.requestFocus();
+                    return;
+                }
+                else
+                {
 
-                registration.setName(name.getText().toString());
-                registration.setDob(dob.getText().toString());
-                registration.setEmail(email.getText().toString());
-                registration.setPhone(mobile.getText().toString());
-                db=FirebaseFirestore.getInstance();
-                Map<String,Object> myuser = new HashMap<>();
-                myuser.put("name",registration.getName());
-                myuser.put("userId",userId);
-                myuser.put("phone",registration.getPhone());
-                myuser.put("dob",registration.getDob());
-                myuser.put("email",registration.getEmail());
-                myuser.put("RequestStatus","N");
-                //String dalna;
-                //dalna = mAuth.getCurrentUser().getUid();
-                docref=db.collection("RegisteredUser").document(userId);
-                db.collection("RegisteredUser").document(userId)
-                        .set(myuser)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Log.d(TAG, "DocumentSnapshot successfully written!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //Log.w(TAG, "Error writing document", e);
-                            }
-                        });
-                //myuser.put("conferenceRegisteresId", conf.getName());
+                    registration.setName(name.getText().toString());
+                    registration.setDob(dob.getText().toString());
+                    registration.setEmail(email.getText().toString());
+                    registration.setPhone(mobile.getText().toString());
+                    db = FirebaseFirestore.getInstance();
+                    Map<String, Object> myuser = new HashMap<>();
+                    myuser.put("name", registration.getName());
+                    myuser.put("userId", userId);
+                    myuser.put("phone", registration.getPhone());
+                    myuser.put("dob", registration.getDob());
+                    myuser.put("email", registration.getEmail());
+                    myuser.put("RequestStatus", "N");
+                    //String dalna;
+                    //dalna = mAuth.getCurrentUser().getUid();
+                    docref = db.collection("RegisteredUser").document(userId);
+                    db.collection("RegisteredUser").document(userId)
+                            .set(myuser)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Log.d(TAG, "DocumentSnapshot successfully written!");
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    //Log.w(TAG, "Error writing document", e);
+                                }
+                            });
+                    //myuser.put("conferenceRegisteresId", conf.getName());
 
-                //final String id=docref.getId();
-                Intent intent=new Intent(getActivity(),MainActivityTwo.class);
-                //intent.putExtra("documentId", id);
-                intent.putExtra("username",name.getText().toString());
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                    //final String id=docref.getId();
+                    Intent intent = new Intent(getActivity(), MainActivityTwo.class);
+                    //intent.putExtra("documentId", id);
+                    intent.putExtra("username", name.getText().toString());
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
 
 
             }

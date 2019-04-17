@@ -4,16 +4,17 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/apply"
+            android:title="Home"
+            android:icon="@drawable/ic_home_black_24dp"/>
 
         <item
-            android:id="@+id/editUSerPRo"
+            android:id="@+id/profile"
             android:title="Profile"
-            android:icon="@drawable/ic_person_black_24dp"
+            android:icon="@drawable/person"
             />
-       <item
-           android:id="@+id/apply"
-           android:title="Apply/Withdraw"
-           android:icon="@drawable/ic_add_black_24dp"/>
+
         <item
             android:id="@+id/Withdraw"
             android:title="Withdraw"
@@ -23,21 +24,13 @@
             android:id="@+id/seeAllRequest"
             android:title="View Requests"
             android:icon="@drawable/ic_insert_chart_black_24dp"></item>
-        <item
-            android:id="@+id/currentStatus"
-            android:title="Current Status"
-            ></item>
+
         <item
             android:id="@+id/logout"
             android:title="Logout"
             android:icon="@drawable/ic_power_settings_new_black_24dp">
 
         </item>
-
-        <item
-            android:id="@+id/about"
-            android:title="About"
-            android:icon="@drawable/ic_info_outline_black_24dp"></item>
 
         <item
             android:id="@+id/create_new_conf"

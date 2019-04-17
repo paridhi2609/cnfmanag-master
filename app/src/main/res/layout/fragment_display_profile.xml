@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayPRofileFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Basic Info"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dname"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date of Birth:"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ddob"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:id="@+id/demail"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="mobile"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dmobile"/>
+    <View
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/startblue" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Secondary Information"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Secondary Email:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dsecemail"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Secondary Contact Number:"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dsecmob"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salutation:"/>
+
+    <TextView
+        android:id="@+id/dsalutation"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Package:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dpackage"/>
+    <View
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/startblue" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Details"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mode of Payment:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dpaymentmode"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction Id:"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dtransid"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction Date:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:id="@+id/dtransdate"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name of Bank:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/dbnkname"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IFSC code:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_height="wrap_content"
+        android:id="@+id/difsccode"/>
+    <View
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/startblue" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transportation Details"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mode of Transport:"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dmodeoftrans"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date Of Arrival:"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/darrival"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accomodation Requirement:"/>
+    <TextView
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="17dp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/daccomreq"
+        android:layout_marginBottom="30dp"/>
+</LinearLayout>
+</ScrollView>

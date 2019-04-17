@@ -2,6 +2,7 @@ package com.btp_iitj.cnfmanag.Core;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,27 +10,40 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.btp_iitj.cnfmanag.AdminDashboard;
 import com.btp_iitj.cnfmanag.Conference.AddConference;
 import com.btp_iitj.cnfmanag.Conference.ConferenceDetailsFragment;
 import com.btp_iitj.cnfmanag.Conference.aboutConferenceFragment;
 import com.btp_iitj.cnfmanag.Conference.allConferencesFragment;
+import com.btp_iitj.cnfmanag.DisplayPRofileFragment;
 import com.btp_iitj.cnfmanag.Domain_Classes.Conference;
 import com.btp_iitj.cnfmanag.Domain_Classes.Registration;
 import com.btp_iitj.cnfmanag.Domain_Classes.User;
+import com.btp_iitj.cnfmanag.HelloBlank;
 import com.btp_iitj.cnfmanag.MainActivity;
 import com.btp_iitj.cnfmanag.Registration.RegistrationFragment;
 import com.btp_iitj.cnfmanag.R;
 import com.btp_iitj.cnfmanag.Registration.RegistrationStep1Fragment;
 import com.btp_iitj.cnfmanag.Registration.RegistrationStep3Fragment;
 import com.btp_iitj.cnfmanag.ViewProfileFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivityTwo extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseFirestore db;
+    public String status;
+    public TextView textView;
     public static FragmentManager fragmentManager;
     public static User user = new User();
     public static Registration registration = new Registration();
@@ -39,8 +53,11 @@ public class MainActivityTwo extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_two);
+        textView=findViewById(R.id.statusInformation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        fragmentManager=getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();
 
 
 
@@ -80,7 +97,38 @@ public class MainActivityTwo extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //Toast.makeText(this, "step1", Toast.LENGTH_SHORT).show();
+            //Log.d("pass", "Document exists!");
+
             ///current status
+            FirebaseAuth kAuth;
+            kAuth=FirebaseAuth.getInstance();
+            final String userId=kAuth.getCurrentUser().getUid();
+            db=FirebaseFirestore.getInstance();
+            db.collection("RegisteredUser").document(userId)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                   fragmentManager=getSupportFragmentManager();
+                                   fragmentManager.beginTransaction().replace(R.id.fragment_container,new HelloBlank()).addToBackStack("dkf").commit();
+
+                                  // Log.d("pass", document.getString("userId"));
+                                    Log.d("pass",document.getString("RequestStatus"));
+                                } else {
+
+                                    fragmentManager=getSupportFragmentManager();
+                                    fragmentManager.beginTransaction().replace(R.id.fragment_container,new HelloBlank()).addToBackStack("dkf").commit();
+                                    Log.d("fail", "Document does not exist!");
+                                }
+                            } else {
+                                Log.d("ultra", "Failed with: ", task.getException());
+                            }
+                        }
+                    });
 
             return true;
         }
@@ -102,7 +150,7 @@ public class MainActivityTwo extends AppCompatActivity
 
             fragmentManager=getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new allConferencesFragment()).addToBackStack("allConferencesFragment").commit();
-        } else if (id == R.id.editUSerPRo) {
+        } else if (id == R.id.profile) {
             fragmentManager=getSupportFragmentManager();
             Bundle args= new Bundle();
             RegistrationStep3Fragment ldf=new RegistrationStep3Fragment();
@@ -112,19 +160,7 @@ public class MainActivityTwo extends AppCompatActivity
             RegistrationStep1Fragment registrationStep1Fragment=new RegistrationStep1Fragment();
             args.putString("username",value);
             registrationStep1Fragment.setArguments(args);
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, registrationStep1Fragment).addToBackStack("registrationFragment").commit();
-
-        }
-         else if (id == R.id.Withdraw) {
-            ///implement delete user
-            ///remove document snapshot
-
-        } else if (id == R.id.about ) {
-            fragmentManager =getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();
-            //infor of conference
-
-
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, new DisplayPRofileFragment()).addToBackStack("displayfragmentprofile").commit();
 
         }
         else if (id == R.id.apply ) {

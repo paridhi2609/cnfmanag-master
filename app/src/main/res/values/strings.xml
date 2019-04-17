@@ -8,6 +8,7 @@
     <string name="action_settings">CurrentStatus</string>
     <string name="displaymoney">your charges for registraton is: </string>
     <string-array name="salutation_adapter">
+        <item>--None--</item>
         <item>Doctor</item>
         <item>Mr.</item>
         <item>Mrs.</item>
@@ -17,6 +18,7 @@
 
     </string-array>
     <string-array name="package_adapter">
+        <item>--None--</item>
         <item>Full Registration</item>
         <item>Student</item>
         <item>Industry Delegate</item>
@@ -24,10 +26,12 @@
 
     </string-array>
     <string-array name="paymentInforItems">
+        <item>--None--</item>
         <item>DD</item>
         <item>Net Banking</item>
     </string-array>
     <string-array name="transport_adapter">
+        <item>--None--</item>
         <item>Bus</item>
         <item>Train</item>
         <item>Flight</item>

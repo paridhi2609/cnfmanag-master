@@ -19,6 +19,14 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:id="@+id/statusInformation"
+        android:textAlignment="center"
+        android:textColor="@color/startblue"/>
 
     <include layout="@layout/content_main" />
 

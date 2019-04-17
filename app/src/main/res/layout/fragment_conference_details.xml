@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,27 +15,22 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="405dp">
+            android:layout_height="280dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="230dp"
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="45dp" />
 
                 <TextView
                     android:id="@+id/descName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="50dp"
+                    android:textAlignment="center"
                     android:textColor="#fff"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -43,25 +38,25 @@
                 <TextView
                     android:id="@+id/descDate"
                     android:layout_width="match_parent"
-                    android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="25dp" />
+                    android:textAlignment="center"
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/descVenue"
-                    android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="25dp" />
+                    android:textAlignment="center"
+                    android:textSize="16dp" />
             </LinearLayout>
 
             <android.support.v7.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="120dp"
+                android:layout_width="200dp"
+                android:layout_height="90dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="275dp">
+                android:layout_marginTop="180dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,10 +65,10 @@
                     android:weightSum="3">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="90dp"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1"
-                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
@@ -83,10 +78,13 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/attendents"
+                            android:layout_gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:paddingTop="10dp"
-                            android:id="@+id/attendents"
+                            android:textAlignment="center"
                             android:textColor="@color/startblue"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -94,10 +92,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
@@ -107,73 +104,64 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="101dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
                             android:paddingTop="10dp"
                             android:text="4"
+                            android:textAlignment="center"
                             android:textColor="@color/startblue"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Papers"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="10dp"
-                            android:text="16"
-                            android:textColor="@color/startblue"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/descDescription"
-            android:textAlignment="center"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="22dp" />
+            android:layout_height="270dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textAlignment="textStart">
+
+            <TextView
+                android:id="@+id/descDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18dp" />
+        </ScrollView>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp">
+
             <Button
-                android:layout_width="80dp"
-                android:text="Apply"
-                android:textColor="#ffffff"
+                android:id="@+id/apply"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@color/startblue"
-                android:id="@+id/apply"
-                />
+                android:background="@drawable/buttonshape"
+                android:text="Apply"
+                android:textColor="#ffffff" />
+
             <Button
-                android:layout_width="80dp"
-                android:textColor="#ffffff"
-                android:text="Withdraw"
+                android:id="@+id/withdr"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:background="@color/startblue"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/withdr"/>
+                android:background="@drawable/buttonshape"
+                android:text="Withdraw"
+                android:textColor="#ffffff" />
         </RelativeLayout>
 
 
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

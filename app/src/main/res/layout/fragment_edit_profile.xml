@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp">
+        android:layout_height="200dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,18 +18,12 @@
             android:background="@drawable/gradientbackground"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="45dp" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Wiliam Snoe"
+                android:layout_marginTop="70dp"
+                android:id="@+id/registerednam"
                 android:textColor="#fff"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -137,7 +131,7 @@
     <Button
         android:textColor="#ffffff"
         android:layout_marginTop="35dp"
-        android:background="@color/startblue"
+        android:background="@drawable/buttonshape"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

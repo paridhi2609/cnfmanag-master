@@ -8,6 +8,13 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Step 1"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+    <TextView
         android:layout_marginTop="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -96,7 +103,7 @@
 
         <Button
             android:layout_alignParentRight="true"
-            android:background="@color/startblue"
+            android:background="@drawable/buttonshape"
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:textSize="25dp"
@@ -107,12 +114,12 @@
     </RelativeLayout>
 
     <TextView
-        android:textColor="@color/startblue"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="40dp"
+        android:textSize="24dp"
         android:textStyle="bold"
         android:id="@+id/display"/>
 

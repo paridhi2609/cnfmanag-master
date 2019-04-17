@@ -20,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.HelloBlank;
 import com.btp_iitj.cnfmanag.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,7 +38,7 @@ import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
  * A simple {@link Fragment} subclass.
  */
 public class RegistrationStep3Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    public static Button finalsave;
+    public static Button finalsave,finalback;
     public Calendar c;
     private FirebaseFirestore db;
     public static ImageView datePIcker;
@@ -54,10 +55,11 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile_page3, container, false);
+        finalback=view.findViewById(R.id.finalBack);
         FirebaseAuth kAuth;
         kAuth=FirebaseAuth.getInstance();
         final String userId=kAuth.getCurrentUser().getUid();
-        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         Spinner spinner = (Spinner) view.findViewById(R.id.transportSpinner);
         spinner.setOnItemSelectedListener(this);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -80,10 +82,12 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 dpd=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                         registration.setArrDate(dayOfMonth+"/"+month+"/"+year);
 
                     }
                 },date,month,year);
+
                 dpd.show();
             }
         });
@@ -97,6 +101,7 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 myuser.put("modeOFtransport",registration.getModeOfTrans());
                 myuser.put("accomodation",registration.getAccomodation());
                 myuser.put("RequestStatus","R");
+                myuser.put("ArrivalDate",registration.getArrDate());
                // myuser.put("dob",registration.getDob());
                // myuser.put("transactinDate",registration.getTransDate());
               //  myuser.put("conferenceId",registration.getConferenceId());
@@ -105,6 +110,15 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 db.collection("RegisteredUser").document(userId)
                         .update(myuser);
                 Toast.makeText(getActivity(), "Request made for a seat!", Toast.LENGTH_LONG).show();
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,new HelloBlank()).commit();
+            }
+        });
+        finalback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationStep2Fragment()).commit();
             }
         });
 
@@ -118,12 +132,12 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                     case R.id.yes:
                         // switch to fragment 1
                         registration.setAccomodation("Y");
-                        Toast.makeText(getActivity(), "Yes selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "Yes selected", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.no:
                         // Fragment 2
                         registration.setAccomodation("N");
-                        Toast.makeText(getActivity(), "NO selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "NO selected", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

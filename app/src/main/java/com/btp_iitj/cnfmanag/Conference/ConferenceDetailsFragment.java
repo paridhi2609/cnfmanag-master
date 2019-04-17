@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.btp_iitj.cnfmanag.HelloBlank;
 import com.btp_iitj.cnfmanag.R;
 import com.btp_iitj.cnfmanag.Registration.RegistrationFragment;
 import com.btp_iitj.cnfmanag.Registration.RegistrationStep1Fragment;
@@ -28,6 +29,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.conf;
 import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 
@@ -40,7 +44,9 @@ public class ConferenceDetailsFragment extends Fragment {
     private static final String TAG = "Suppport";
     public static TextView n,d,v,desc;
     private static Button bL,bR;
+    public String checking;
     public static FragmentManager fragmentManager;
+    public static TextView countView;
     public ConferenceDetailsFragment() {
         // Required empty public constructor
     }
@@ -51,7 +57,7 @@ public class ConferenceDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        final TextView countView;
+
         View view= inflater.inflate(R.layout.fragment_conference_details, container, false);
         countView=view.findViewById(R.id.attendents);
         bL=view.findViewById(R.id.withdr);
@@ -64,10 +70,12 @@ public class ConferenceDetailsFragment extends Fragment {
                         if (task.isSuccessful()) {
                             int count = 0;
                             for (DocumentSnapshot document : task.getResult()) {
-                                count++;
-
-                                countView.setText(String.valueOf(count));
-                            }
+                                String x=document.getString("RequestStatus");
+                                if("Y".equals(x))
+                                {Log.d("paridhi",document.getString("RequestStatus"));
+                                    count++;}
+                                 }
+                            countView.setText(String.valueOf(count));
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -107,6 +115,8 @@ public class ConferenceDetailsFragment extends Fragment {
                 }
             }
         });
+
+
         bL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,22 +125,14 @@ public class ConferenceDetailsFragment extends Fragment {
                 FirebaseAuth kAuth;
                 kAuth=FirebaseAuth.getInstance();
                 final String userId=kAuth.getCurrentUser().getUid();
-                db.collection("RegisteredUser").document(userId)
-                        .delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
+                Map<String,Object> myuser = new HashMap<>();
+                myuser.put("RequestStatus","N");
 
-                                Toast.makeText(getActivity(), "Application Successfully Withdrawen!", Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.w(TAG, "Error deleting document", e);
-                            }
-                        });
+                //ar String value=getArguments().getString("username");
+                db.collection("RegisteredUser").document(userId)
+                        .update(myuser);
+                Toast.makeText(getActivity(), "Withdrawn!", Toast.LENGTH_SHORT).show();
+
 
 
             }
@@ -149,21 +151,37 @@ public class ConferenceDetailsFragment extends Fragment {
                         .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(documentSnapshot.getString("RequestStatus")=="R"||documentSnapshot.getString("RequestStatus")=="Y"){
+
+                                checking=documentSnapshot.getString("RequestStatus");
+                                Log.d("pari gehlot",checking+"0");
+                                if("R".equals(checking)||"Y".equals(checking)){
+                                    Log.d("pari gehlot",checking+"1");
                                     Toast.makeText(getActivity(), "You have already Registered for the Conference!", Toast.LENGTH_LONG).show();
-                                    bR.setEnabled(false);
+                                    //bR.setEnabled(false);
+                                    //return;
                                 }
-                                else {
+                                else if("N".equals(checking)) {
+                                    Log.d("pari gehlot",checking+"2");
+                                    //Toast.makeText(getActivity(), "Successfully applied!", Toast.LENGTH_LONG).show();
                                     String check = documentSnapshot.getString("salutation");
                                     String transactionId = documentSnapshot.getString("TransId");
+                                    String aco=documentSnapshot.getString("accomodation");
                                     if (check == null) {
                                         fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).addToBackStack("1").commit();
                                     } else if (transactionId == null) {
                                         Toast.makeText(getActivity(), "Resuming from where You Left!", Toast.LENGTH_SHORT).show();
                                         fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep2Fragment()).addToBackStack("2").commit();
-                                    } else {
+                                    } else if(aco==null){
                                         fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep3Fragment()).addToBackStack("3").commit();
                                     }
+                                    else{
+                                        fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationStep1Fragment()).addToBackStack("dkf").commit();
+                                    }
+
+                                }
+                                else if("rejected".equals(checking)){
+                                        fragmentManager=getActivity().getSupportFragmentManager();
+                                        fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationStep1Fragment()).addToBackStack("dkf").commit();
                                 }
                             }
                         });

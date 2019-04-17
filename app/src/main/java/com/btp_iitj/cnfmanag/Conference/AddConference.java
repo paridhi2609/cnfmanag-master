@@ -52,18 +52,41 @@ public class AddConference extends Fragment {
                 conf.setDate(date.getText().toString());
                 conf.setVenue(venue.getText().toString());
                 conf.setDescription(description.getText().toString());
+                if(name.getText().toString().isEmpty()){
+                    name.setError("Name is Required");
+                    name.requestFocus();
+                    return;
+                }
+                else  if(date.getText().toString().isEmpty()){
+                    date.setError("Date is Required");
+                    date.requestFocus();
+                    return;
+                }
+                else if(venue.getText().toString().isEmpty()){
+                    venue.setError("Venue is Required");
+                    venue.requestFocus();
+                    return;
+                }
+                else  if(description.getText().toString().isEmpty()){
+                    description.setError("Description is Required");
+                    description.requestFocus();
+                    return;
+                }
 
-                Map<String, Object> conference = new HashMap<>();
-                db = FirebaseFirestore.getInstance();
-                conference.put("name", conf.getName());
-                conference.put("venue", conf.getVenue());
-                conference.put("date", conf.getDate());
-                conference.put("description", conf.getDescription());
-                Toast.makeText(getActivity(), "Data successfully Saved", Toast.LENGTH_SHORT).show();
+                else {
+
+                    Map<String, Object> conference = new HashMap<>();
+                    db = FirebaseFirestore.getInstance();
+                    conference.put("name", conf.getName());
+                    conference.put("venue", conf.getVenue());
+                    conference.put("date", conf.getDate());
+                    conference.put("description", conf.getDescription());
+                    Toast.makeText(getActivity(), "Data successfully Saved", Toast.LENGTH_SHORT).show();
 
 
-                db.collection("CONFERENCE").document("science")
-                        .update(conference);
+                    db.collection("CONFERENCE").document("science")
+                            .update(conference);
+                }
             }
         });
 

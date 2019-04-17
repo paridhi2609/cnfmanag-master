@@ -36,7 +36,7 @@ import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
  * A simple {@link Fragment} subclass.
  */
 public class RegistrationStep1Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    private String str;
+    //private String str;
     public String money;
     public TextView moneyam;
     public static EditText secEmail,secMob;
@@ -61,7 +61,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
         FirebaseAuth kAuth;
         kAuth=FirebaseAuth.getInstance();
        final String userId=kAuth.getCurrentUser().getUid();
-        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         nex=view.findViewById(R.id.save_page1);
         moneyam=view.findViewById(R.id.display);
         secMob=view.findViewById(R.id.sec_contact);
@@ -95,6 +95,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
         nex.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
 
                 registration.setSecemail(secEmail.getText().toString());
@@ -132,6 +133,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String str="0 Rs";
         str=parent.getItemAtPosition(position).toString();
         //textView.setText(str);
         Spinner spin = (Spinner)parent;
@@ -141,24 +143,24 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
         {
             registration.setSalutation(str);
             myuser.put("salutation",registration.getSalutation());
-            Toast.makeText(getActivity(), "Your choose :1",Toast.LENGTH_SHORT).show();
+           // Toast.makeText(getActivity(), "Your choose :1",Toast.LENGTH_SHORT).show();
         }
-        String money="";
+
 
         if(spin2.getId() == R.id.package_selection_spinner) {
             registration.setRegPackage(str);
             str=parent.getItemAtPosition(position).toString();
-            if(str=="Full Registration")
+            if("Full Registration".equals(str))
                 money="10000";
-            else if(str=="Student")
+            else if("Student".equals(str))
                 money="1000";
-            else if(str=="Industry Delegate") {
+            else if("Industry Delegate".equals(str)) {
                 money="15000";
             }
            // money="your cost for registration"+money;
             myuser.put("registrationPackage",registration.getRegPackage());
 
-            String temp="your amount for registrattion: ";
+            String temp="your amount for registrattion: "+money+" Rs.";
             moneyam.setText(temp);
 
             //Toast.makeText(getActivity(), "Your choose : 2", Toast.LENGTH_SHORT).show();

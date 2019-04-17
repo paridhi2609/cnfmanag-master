@@ -58,7 +58,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
         FirebaseAuth kAuth;
         kAuth=FirebaseAuth.getInstance();
         final String userId=kAuth.getCurrentUser().getUid();
-        Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), userId, Toast.LENGTH_SHORT).show();
         bankNam=view.findViewById(R.id.bankname);
         transid=view.findViewById(R.id.transacIdEDit);
         ifsccod=view.findViewById(R.id.ifscCode);
@@ -78,37 +78,55 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
         nxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db=FirebaseFirestore.getInstance();
-                registration.setTransId(transid.getText().toString());
-                Toast.makeText(getActivity(), registration.getTransId(), Toast.LENGTH_SHORT).show();
-                //registration.setTransDate(registration.getTransDate());
-                registration.setBankName(bankNam.getText().toString());
-                registration.setIfscCode(ifsccod.getText().toString());
-                Map<String,Object> myuser = new HashMap<>();
-                myuser.put("paymentMode",registration.getPaymentMode());
-                myuser.put("TransId",registration.getTransId());
-                myuser.put("BankName",registration.getBankName());
-                myuser.put("IfscCode",registration.getIfscCode());
+                if(transid.getText().toString().isEmpty()){
+                    transid.setError("Transaction Id is Required");
+                    transid.requestFocus();
+                    return;
+                }
+                else  if(bankNam.getText().toString().isEmpty()){
+                    bankNam.setError("Bank Name is Required");
+                    bankNam.requestFocus();
+                    return;
+                }
+                else  if(ifsccod.getText().toString().isEmpty()){
+                    ifsccod.setError("IFSC code is Required");
+                    ifsccod.requestFocus();
+                    return;
+                }
 
-                //myuser.put("conferenceRegisteresId", conf.getName());
-               // String value=getArguments().getString("username");
-                //Bundle args= new Bundle();
-                RegistrationStep3Fragment ldf=new RegistrationStep3Fragment();
-                //String id=value;
-                //args.putString("username",value);
-                //ldf.setArguments(args);
-                db.collection("RegisteredUser").document(userId)
-                        .update(myuser);
-                fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack("registrationStep2Fragment").commit();
+                    else {
+                    db = FirebaseFirestore.getInstance();
+                    registration.setTransId(transid.getText().toString());
+                    //Toast.makeText(getActivity(), registration.getTransId(), Toast.LENGTH_SHORT).show();
+                    //registration.setTransDate(registration.getTransDate());
+                    registration.setBankName(bankNam.getText().toString());
+                    registration.setIfscCode(ifsccod.getText().toString());
+                    Map<String, Object> myuser = new HashMap<>();
+                    myuser.put("paymentMode", registration.getPaymentMode());
+                    myuser.put("TransId", registration.getTransId());
+                    myuser.put("BankName", registration.getBankName());
+                    myuser.put("IfscCode", registration.getIfscCode());
+                    myuser.put("transDate",registration.getTransDate());
 
+                    //myuser.put("conferenceRegisteresId", conf.getName());
+                    // String value=getArguments().getString("username");
+                    //Bundle args= new Bundle();
+                    RegistrationStep3Fragment ldf = new RegistrationStep3Fragment();
+                    //String id=value;
+                    //args.putString("username",value);
+                    //ldf.setArguments(args);
+                    db.collection("RegisteredUser").document(userId)
+                            .update(myuser);
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack("registrationStep2Fragment").commit();
+                }
             }
         });
         pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentManager=getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).addToBackStack("registrationStep1Fragment").commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new RegistrationStep1Fragment()).commit();
 
             }
         });
@@ -127,6 +145,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
 
                     }
                 },date,month,year);
+
                 dpd.show();
             }
         });
@@ -138,7 +157,7 @@ public class RegistrationStep2Fragment extends Fragment implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String str= parent.getItemAtPosition(position).toString();
         registration.setPaymentMode(str);
-        Toast.makeText(getActivity(), "Item selected for payment Option", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "Item selected for payment Option", Toast.LENGTH_SHORT).show();
 
     }
 

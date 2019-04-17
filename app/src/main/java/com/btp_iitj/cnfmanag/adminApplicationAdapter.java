@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +25,27 @@ import java.util.Map;
 
 public class adminApplicationAdapter extends FirestoreRecyclerAdapter<AdminApplications,adminApplicationAdapter.adminApplication_holder> {
 
-
-
+    public String temp;
+    private onItemCLickListener listener;
     public adminApplicationAdapter(@NonNull FirestoreRecyclerOptions<AdminApplications> options) {
         super(options);
     }
 
     @Override
     protected void onBindViewHolder(@NonNull adminApplication_holder holder, int position, @NonNull AdminApplications model) {
-        holder.cname.setText(model.getUserId());
+
+        FirebaseFirestore db;
+        db=FirebaseFirestore.getInstance();
+        db.collection("RegisteredUser").document(model.getUserId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        temp=documentSnapshot.getString("name");
+                    }
+                });
+        holder.cname.setText(temp);
+        holder.cextra.setText(model.getUserId());
         Log.d("suthar", "Model: " + model.toString());
     }
 
@@ -44,7 +57,7 @@ public class adminApplicationAdapter extends FirestoreRecyclerAdapter<AdminAppli
     }
 
     class adminApplication_holder extends RecyclerView.ViewHolder{
-        TextView cname;
+        TextView cname,cextra;
         Button acept,rejct;
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         TextView text;
@@ -52,6 +65,7 @@ public class adminApplicationAdapter extends FirestoreRecyclerAdapter<AdminAppli
         public adminApplication_holder(@NonNull View itemView) {
             super(itemView);
             cname=itemView.findViewById(R.id.adminapplicationname);
+            cextra=itemView.findViewById(R.id.extra);
             acept=(Button)itemView.findViewById(R.id.adminConfirm);
             rejct=(Button)itemView.findViewById(R.id.adminReject);
             text=itemView.findViewById(R.id.adminapplicationname);
@@ -70,29 +84,31 @@ public class adminApplicationAdapter extends FirestoreRecyclerAdapter<AdminAppli
                 public void onClick(View v) {
                     String str=text.getText().toString();
                     Map<String,Object> myuser = new HashMap<>();
-                    myuser.put("RequestStatus","N");
+                    myuser.put("RequestStatus","rejected");
                     db.collection("RegisteredUser").document(str).update(myuser);
-                    db.collection("RegisteredUser").document(str)
-                            .delete()
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
 
-                                   // Toast.makeText(this, "Application Rejected!", Toast.LENGTH_LONG).show();
-                                    //Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    //Log.w(TAG, "Error deleting document", e);
-                                }
-                            });
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    int position=getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION && listener!=null){
+                        listener.onItemClick(getSnapshots().getSnapshot(position),position );
+                    }
+
                 }
             });
 
         }
 
+    }
+    public interface onItemCLickListener{
+        void onItemClick(DocumentSnapshot documentSnapshot, int position);
+    }
+    public void setOnItemCLickLIstener(onItemCLickListener listener){
+        this.listener=listener;
     }
 
 
