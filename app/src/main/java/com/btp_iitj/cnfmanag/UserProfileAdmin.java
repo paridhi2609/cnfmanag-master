@@ -9,30 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.conf;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DisplayPRofileFragment extends Fragment {
+public class UserProfileAdmin extends Fragment {
+
     private FirebaseFirestore db;
     public static TextView mdepart,mname,mdob,memail,mmobile,msecemail,msecmobile,msalutation,mpackage,mpaymentmode, mtransid,mtransdate, mbankname,mifsccodem,mmodeoftrans,marrivaldate,maccomodation;
     public String str;
 
 
-    public DisplayPRofileFragment() {
+    public UserProfileAdmin() {
         // Required empty public constructor
     }
 
@@ -61,9 +57,9 @@ public class DisplayPRofileFragment extends Fragment {
         maccomodation=view.findViewById(R.id.daccomreq);
 
         db=FirebaseFirestore.getInstance();
-        FirebaseAuth kAuth;
-        kAuth=FirebaseAuth.getInstance();
-        final String userId=kAuth.getCurrentUser().getUid();
+        //FirebaseAuth kAuth;
+        //kAuth=FirebaseAuth.getInstance();
+        String userId=getArguments().getString("userId");
         DocumentReference docRef = db.collection("RegisteredUser").document(userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -93,14 +89,15 @@ public class DisplayPRofileFragment extends Fragment {
                         mname.setText(str);
 
                     } else {
-                       // Log.d(TAG, "No such document");
+                        // Log.d(TAG, "No such document");
                     }
                 } else {
-                   // Log.d(TAG, "get failed with ", task.getException());
+                    // Log.d(TAG, "get failed with ", task.getException());
                 }
             }
         });
         return view;
     }
+
 
 }

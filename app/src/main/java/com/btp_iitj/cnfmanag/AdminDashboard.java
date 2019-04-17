@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -71,7 +72,14 @@ public class AdminDashboard extends Fragment {
         adapter.setOnItemCLickLIstener(new adminApplicationAdapter.onItemCLickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                Toast.makeText(getActivity(), "this is paridhi gehlot", Toast.LENGTH_SHORT).show();
+                String id=documentSnapshot.getId();
+                Bundle args=new Bundle();
+                UserProfileAdmin ldf=new UserProfileAdmin();
+                args.putString("userId",id);
+                ldf.setArguments(args);
+                FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,ldf).commit();
+                //Toast.makeText(getActivity(), "this is paridhi gehlot", Toast.LENGTH_SHORT).show();
             }
         });
 

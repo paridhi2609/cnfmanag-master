@@ -171,6 +171,10 @@ public class MainActivityTwo extends AppCompatActivity
 
 
         }
+        else if(id==R.id.EditPRofile){
+            fragmentManager=getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragment_container,new RegistrationFragment()).commit();
+        }
         else if (id == R.id.Withdraw ) {
             fragmentManager =getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragment_container,new ConferenceDetailsFragment()).commit();

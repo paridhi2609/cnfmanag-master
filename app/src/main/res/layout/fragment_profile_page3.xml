@@ -51,6 +51,26 @@
             />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/startblue"
+            android:layout_width="match_parent"
+            android:text="Departure Date:"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_date_picker"
+            android:id="@+id/departureDate"
+            />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"

@@ -14,6 +14,12 @@
             android:title="Profile"
             android:icon="@drawable/person"
             />
+        <item
+            android:id="@+id/EditPRofile"
+            android:title="Edit Profile"
+            android:icon="@drawable/ic_edit_black_24dp">
+
+        </item>
 
         <item
             android:id="@+id/Withdraw"
@@ -41,7 +47,7 @@
         <item
             android:id="@+id/all_conf"
             android:title="All conferences"
-            android:visible="true"/>
+            android:visible="false"/>
     </group>
 
 

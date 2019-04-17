@@ -160,7 +160,7 @@ public class RegistrationStep1Fragment extends Fragment implements AdapterView.O
            // money="your cost for registration"+money;
             myuser.put("registrationPackage",registration.getRegPackage());
 
-            String temp="your amount for registrattion: "+money+" Rs.";
+            String temp="your amount for registration: "+money+" Rs.";
             moneyam.setText(temp);
 
             //Toast.makeText(getActivity(), "Your choose : 2", Toast.LENGTH_SHORT).show();

@@ -40,10 +40,11 @@ import static com.btp_iitj.cnfmanag.Core.MainActivityTwo.registration;
 public class RegistrationStep3Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public static Button finalsave,finalback;
     public Calendar c;
+    public  Calendar c2;
     private FirebaseFirestore db;
-    public static ImageView datePIcker;
+    public static ImageView datePIcker,departDate;
     public static FragmentManager fragmentManager;
-    public DatePickerDialog dpd;
+    public DatePickerDialog dpd,dpd2;
 
     public RegistrationStep3Fragment() {
         // Required empty public constructor
@@ -70,6 +71,7 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
 // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         datePIcker=view.findViewById(R.id.datePickr);
+        departDate=view.findViewById(R.id.departureDate);
         finalsave=view.findViewById(R.id.finalSubmit);
         datePIcker.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -91,6 +93,26 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 dpd.show();
             }
         });
+        departDate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                c2=Calendar.getInstance();
+                int date=c2.get(Calendar.DAY_OF_MONTH);
+                int month=c2.get(Calendar.MONTH);
+                int year=c2.get(Calendar.YEAR);
+                dpd2=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                        registration.setDepartDate(dayOfMonth+"/"+month+"/"+year);
+
+                    }
+                },date,month,year);
+
+                dpd2.show();
+            }
+        });
         RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
         finalsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +124,7 @@ public class RegistrationStep3Fragment extends Fragment implements AdapterView.O
                 myuser.put("accomodation",registration.getAccomodation());
                 myuser.put("RequestStatus","R");
                 myuser.put("ArrivalDate",registration.getArrDate());
+                myuser.put("DepartureDate",registration.getDepartDate());
                // myuser.put("dob",registration.getDob());
                // myuser.put("transactinDate",registration.getTransDate());
               //  myuser.put("conferenceId",registration.getConferenceId());

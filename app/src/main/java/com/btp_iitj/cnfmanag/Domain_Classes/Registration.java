@@ -10,6 +10,16 @@ public class Registration {
     String accomodation;
     String accepted;
 
+    public String getDepartDate() {
+        return departDate;
+    }
+
+    public void setDepartDate(String departDate) {
+        this.departDate = departDate;
+    }
+
+    String departDate;
+
     public String getAccepted() {
         return accepted;
     }
